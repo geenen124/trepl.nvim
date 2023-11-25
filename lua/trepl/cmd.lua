@@ -1,44 +1,19 @@
-local tmux = require("trepl.tmux")
 local core = require("trepl.core")
 local utils = require("trepl.utils")
 local cmd = {}
 
 -- goals:
 -- todo: handle repeating command
--- todo: use lsp to get current block
-
-cmd.send_line = function(line --[[string]], use_carriage --[[boolean]], escape_line --[[boolean]])
-  if escape_line == nil then
-    escape_line = true
-  end
-
-  local formatted_line = line
-
-  if escape_line then
-    formatted_line = vim.fn.shellescape(line)
-  end
-
-  if tmux.is_reserved_keyword(line) then
-    core.send_keys(formatted_line, {keyopts="-l"})
-    core.send_keys("ENTER")
-    return
-  else
-    if use_carriage then
-      formatted_line = formatted_line .. " ENTER"
-    end
-    core.send_keys(formatted_line)
-  end
-end
 
 cmd.send_current_line = function(use_carriage --[[boolean]])
   use_carriage = use_carriage or true
   local line = vim.api.nvim_get_current_line()
-  cmd.send_line(line, use_carriage)
+  core.send_string(line, use_carriage)
 end
 
 local function send_table(lines)
   for _, line in ipairs(lines) do
-    cmd.send_line(line, true)
+    core.send_string(line, true)
   end
 end
 

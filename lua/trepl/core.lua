@@ -48,4 +48,27 @@ core.set_socket = function(socket --[[string]])
   core.store.socket = socket
 end
 
+core.send_string = function(text --[[string]], use_carriage --[[boolean]], escape_line --[[boolean]])
+  if escape_line == nil then
+    escape_line = true
+  end
+
+  local formatted_text = text
+
+  if escape_line then
+    formatted_text = vim.fn.shellescape(text)
+  end
+
+  if tmux.is_reserved_keyword(text) then
+    core.send_keys(formatted_text, {keyopts="-l"})
+    core.send_keys("ENTER")
+    return
+  else
+    if use_carriage then
+      formatted_text = formatted_text .. " ENTER"
+    end
+    core.send_keys(formatted_text)
+  end
+end
+
 return core
