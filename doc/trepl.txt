@@ -1,0 +1,34 @@
+*trepl.nvim* Lightweight tmux REPL (trepl) Interaction For Neovim.
+
+------------------------------------------------------------------
+Introduction                                  *trepl-introduction*
+
+
+`trepl.nvim` is a lightweight plugin for Neovim, designed to
+easily pass data to tmux panes from within Neovim. It allows you 
+to send lines and selections from your current buffer to a tmux
+pane without leaving your editor, facilitating quick interaction
+with other processes, e.g. REPLs.
+
+------------------------------------------------------------------
+Commands                                          *trepl-commands*
+
+trepl includes the followings commands:
+
+:TreplSetSocket socket_path
+  Set the tmux socket path. By default this socket path is set to
+  the socket path set in the `$TMUX` environment variable.
+
+:TreplSetPane pane
+  Set the tmux pane that data will be sent to. By default it will
+  be sent to the next pane
+
+:Trepl current_line
+  Send the current line to the tmux pane.
+
+:Trepl selection
+  Send the current selection to the tmux pane.
+
+:Trepl selected_lines
+  Send the lines included in your current selection to the tmux
+  pane.
