@@ -32,3 +32,22 @@ trepl includes the followings commands:
 :Trepl selected_lines
   Send the lines included in your current selection to the tmux
   pane.
+
+N.B. The following commands make use of treesitter, so please
+make sure that the correct parser is installed and that trepl
+supports it:
+
+:Trepl variable
+  Send the current variable to the tmux pane.
+
+:Trepl function
+  Send the current function to the tmux pane.
+
+:Trepl class
+  Send the current class to the tmux pane.
+
+------------------------------------------------------------------
+Languages                                        *trepl-languages*
+
+Supported languages:
+- python

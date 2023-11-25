@@ -85,6 +85,7 @@ end
 
 local handle_send_node = function(node_type, mapping_option, opts, bufnr)
   if opts == nil then
+    -- luacheck: ignore opts
     opts = {}
   end
   if bufnr == nil then

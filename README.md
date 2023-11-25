@@ -51,6 +51,9 @@ require("trepl").setup {
 Recommended - set up keyboard mappings as follows:
 ```lua
 vim.keymap.set("n", "<leader>tc", ":Trepl current_line<cr>")
+vim.keymap.set("n", "<leader>tv", ":Trepl variable<cr>")
+vim.keymap.set("n", "<leader>tcl", ":Trepl class<cr>")
+vim.keymap.set("n", "<leader>tfn", ":Trepl function<cr>")
 vim.keymap.set("v", "<leader>ts", ":Trepl selection<cr>")
 vim.keymap.set("v", "<leader>tl", ":Trepl selected_lines<cr>")
 ```
@@ -65,6 +68,17 @@ Commands:
 * `Trepl selection` - send the current selection.
 * `Trepl selected_lines` - send the lines included in your current selection.
 
+N.B. The following commands make use of treesitter, so please
+make sure that the correct parser is installed and that trepl
+supports it:
+* `Trepl variable` - send the current variable.
+* `Trepl function` - send the current function.
+* `Trepl class` - send the current class.
+
+## Supported Languages
+The following languages are supported for intelligent treesitter-powered selections:
+- python
+
 ## License
 `trepl.nvim` is open-source software released under the MIT License.
 
@@ -73,4 +87,4 @@ Commands:
 Add Support For:
 * Repeated motions
 * Send files
-* Implement intelligent treesitter-based sends
+* Additional languages

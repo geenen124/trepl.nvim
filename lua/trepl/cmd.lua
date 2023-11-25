@@ -1,14 +1,15 @@
 local core = require("trepl.core")
 local utils = require("trepl.utils")
+local ts_integration = require("trepl.ts")
 local cmd = {}
 
 -- goals:
 -- todo: handle repeating command
 
-cmd.send_current_line = function(use_carriage --[[boolean]])
-  use_carriage = use_carriage or true
+cmd.send_current_line = function(add_newline --[[boolean]])
+  add_newline = add_newline or true
   local line = vim.api.nvim_get_current_line()
-  core.send_string(line, use_carriage)
+  core.send_string(line, add_newline)
 end
 
 local function send_table(lines)
@@ -33,6 +34,9 @@ local COMMAND_TO_FNS = {
   current_line = cmd.send_current_line,
   selection = cmd.send_selection,
   selected_lines = cmd.send_selected_lines,
+  variable = ts_integration.send_variable,
+  ["function"] = ts_integration.send_function,
+  class = ts_integration.send_class,
 }
 
 cmd.commands = {
@@ -51,7 +55,7 @@ cmd.commands = {
       nargs = 1,
       range = true,
       complete = function(_, _, _)
-        return {"current_line", "selection", "selected_lines"}
+        return {"current_line", "selection", "selected_lines", "function", "class", "variable"}
       end
     }
   },
