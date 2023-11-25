@@ -61,8 +61,9 @@ core.send_string = function(text --[[string]], use_carriage --[[boolean]], escap
 
   if tmux.is_reserved_keyword(text) then
     core.send_keys(formatted_text, {keyopts="-l"})
-    core.send_keys("ENTER")
-    return
+    if use_carriage then
+      core.send_keys("ENTER")
+    end
   else
     if use_carriage then
       formatted_text = formatted_text .. " ENTER"
